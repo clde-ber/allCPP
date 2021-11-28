@@ -39,8 +39,8 @@ class	PhoneBook
 	public :
         PhoneBook(void);
         ~PhoneBook(void);
-		int do_print(PhoneBook *tmp) const;
-        int promptForIndex(void) const;
+		void doPrint(PhoneBook *tmp) const;
+        void promptForIndex(void) const;
         int do_add(PhoneBook *ind);
 };
 

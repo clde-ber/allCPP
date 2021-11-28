@@ -87,13 +87,13 @@ void    profile::printContact(std::string str)
         std::cout << str.substr(0, 9) << ".";
 }
 
-int PhoneBook::promptForIndex(void) const
+void PhoneBook::promptForIndex(void) const
 {
     std::string input("");
 
     std::cout << "Please enter index for contact details" << std::endl;
 	getline(std::cin, input);
-	if (input.at(0) >= 48 and input.at(0) <= 48 + index + 1 and input.length() == 1)
+	if (input.at(0) >= 48 and input.at(0) <= 48 + _contactNb - 1 and input.length() == 1)
     {
         std::cout << "     index|     " << input.at(0) << std::endl;
         std::cout << "first name|     " << this->_ind[input.at(0) - 48].getFirstName() << std::endl;
@@ -102,26 +102,20 @@ int PhoneBook::promptForIndex(void) const
         std::cout << "phone num.|     " << this->_ind[input.at(0) - 48].getPhoneNumber() << std::endl;
         std::cout << "darkest s.|     " << this->_ind[input.at(0) - 48].getDarkestSecret() << std::endl;
     }
-	else if (input.compare("EXIT"))
+	else
 	{
 		std::cout << "Index must range from 0 to " << _contactNb - 1 << std::endl;
-		return (promptForIndex());
+		promptForIndex();
 	}
-    else
-        return 0;
-    return 1;
 }
 
-int PhoneBook::do_print(PhoneBook *tmp) const
+void PhoneBook::doPrint(PhoneBook *tmp) const
 {
     int i = 0;
 
 	
 	if (!_contactNb)
-	{
 		std::cout << "Phonebook is empty!" << std::endl;
-		return 0;
-    }
 	std::cout << "     index|" << "first name|" << " last name|" \
         << "  nickname" << std::endl;
     for (i = 0; i < tmp->_contactNb; i++)
@@ -134,9 +128,7 @@ int PhoneBook::do_print(PhoneBook *tmp) const
         tmp->_ind[i].printContact(tmp->_ind[i].getNickName());
         std::cout << std::endl;
     }
-    if (!promptForIndex())
-		return 0;
-    return 1;
+    promptForIndex();
 }
 
 int PhoneBook::do_add(PhoneBook *ind)
@@ -147,35 +139,35 @@ int PhoneBook::do_add(PhoneBook *ind)
         ind->_contactNb++;
     if (ind->index == 8)
         ind->index = 0;
-    while (input.compare("") == 0)
+    while (input == "")
     {
 	    std::cout << "Please enter first name" << std::endl;
     	getline(std::cin, input);
     }
     ind->_ind[ind->index].setFirstName(input);
     input = "";
-    while (input.compare("") == 0)
+    while (input == "")
     {
         std::cout << "Please enter last name" << std::endl;
         getline(std::cin, input);
     }
     ind->_ind[ind->index].setLastName(input);
     input = "";
-    while (input.compare("") == 0)
+    while (input == "")
     {
         std::cout << "Please enter nickname" << std::endl;
         getline(std::cin, input);
     }
     ind->_ind[ind->index].setNickName(input);
     input = "";
-    while (input.compare("") == 0)
+    while (input == "")
     {
         std::cout << "Please enter phone number" << std::endl;
         getline(std::cin, input);
     }
     ind->_ind[ind->index].setPhoneNumber(input);
     input = "";
-    while (input.compare("") == 0)
+    while (input == "")
     {
         std::cout << "Please enter darkest secret" << std::endl;
         getline(std::cin, input);

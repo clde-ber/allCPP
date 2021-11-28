@@ -13,10 +13,7 @@ int main(void)
         else if (line == "EXIT")
             return 0 ;
         else if (line == "SEARCH")
-        {
-			if (!individuals.do_print(&individuals))
-				return 0;
-        }
+			individuals.doPrint(&individuals);
         else
             std::cout << "Wrong entry" << std::endl;
     }
